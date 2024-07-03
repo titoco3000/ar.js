@@ -1,84 +1,97 @@
 <!doctype HTML>
 <html>
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
 <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-
-<body style="margin: 0px; overflow: hidden;">
-
-<script>
-
-AFRAME.registerComponent('updater', {
-
-	init: function()
-	{
-        // declare variable for later access
-		this.num = 0;
-        // you can also access the underlying 3D object of a scene object,
-        //   for example:
-		// let target = document.querySelector('#earth').object3D;
-        // target.scale.set( 0.75, 0.75, 0.75 );
-	},
-	
-    // time      = total time since init (milliseconds)
-    // timeDelta = time since last tick
-	tick: function (time, timeDelta) 
-	{
-		this.num += 1;
-        // console.log( this.num );
+<style>
+	body{
+		margin: 0px; overflow: hidden;
 	}
-	
-});
-
-// access underlying 3D object this component is attached to
-AFRAME.registerComponent('spinner', {
-
-	init: function()
-	{
-		this.el.object3D.scale.set(0.75, 0.75, 0.75);
-	},
-	
-	tick: function (time, timeDelta) 
-	{
-		this.el.object3D.rotation.y += 0.01
+	#upd-holder{
+		position: fixed;
+		top: 0;
+		right: 0;
+		background-color: white;
 	}
-    
-});
+
+</style>
+<body>
+
+	<script>
+		const updateTime = "5:34";
+
+		document.onload = ()=>{
+			console.log('loaded!');
+			document.getElementById("lastUpd").innerText = updateTime;
+		};
 
 
-</script>
+		AFRAME.registerComponent('updater', {
+
+			init: function () {
+				// declare variable for later access
+				this.num = 0;
+				// you can also access the underlying 3D object of a scene object,
+				//   for example:
+				// let target = document.querySelector('#earth').object3D;
+				// target.scale.set( 0.75, 0.75, 0.75 );
+			},
+
+			// time      = total time since init (milliseconds)
+			// timeDelta = time since last tick
+			tick: function (time, timeDelta) {
+				this.num += 1;
+				// console.log( this.num );
+			}
+
+		});
+
+		// access underlying 3D object this component is attached to
+		AFRAME.registerComponent('spinner', {
+
+			init: function () {
+				this.el.object3D.scale.set(0.75, 0.75, 0.75);
+			},
+
+			tick: function (time, timeDelta) {
+				this.el.object3D.rotation.y += 0.01
+			}
+
+		});
 
 
-<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+	</script>
 
-    <a-assets>
-		<img id="earth-sphere" src="./earth-sphere.jpg" />
-	</a-assets>
-    
-    <a-marker type="pattern" url="./kanji.patt">
-        <a-box 
-          position="0 0.5 0" 
-          material="color: red; transparent: true; opacity: 0.80;"
-          scale="0.5 0.5 0.5"
-          rotation="-20 0 0"
-          >
-          </a-box>
-        <!-- <a-sphere 
+
+	<a-scene embedded vr-mode-ui="enabled: false;" arjs="debugUIEnabled: false;">
+
+		<a-assets>
+			<img id="earth-sphere" src="images/earth-sphere.jpg" />
+		</a-assets>
+
+		<a-marker type="pattern" url="./kanji.patt">
+			<a-box position="0 0.5 0" material="color: red; transparent: true; opacity: 0.80;" scale="0.5 0.5 0.5"
+				rotation="-20 0 0">
+			</a-box>
+			<!-- <a-sphere 
                id="earth"
                position="0 0.5 0" 
                material="src: #earth-sphere; transparent: true; opacity: 0.95;"
                spinner >
                
         </a-sphere> -->
-    </a-marker>
-    
-    <a-entity camera></a-entity>
-    
-    <!-- empty entity, running previously declared script -->
-    <a-entity updater></a-entity>
-    
-    
-    
-</a-scene>
+		</a-marker>
+
+		<a-entity camera></a-entity>
+
+		<!-- empty entity, running previously declared script -->
+		<a-entity updater></a-entity>
+
+
+
+	</a-scene>
+	<div id="upd-holder">Last updated: <span id="lastUpd"></span></div>
 </body>
+
 </html>

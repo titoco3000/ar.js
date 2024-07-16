@@ -1,29 +1,25 @@
 <!doctype HTML>
 <html>
-
-<head>
-	<script
-		src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
-	<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
-	<script defer src="script.js"></script>
-	<style>
-		#debug-panel{
-			position: fixed;
-			right: 0;
-			text-align: end;
-			top: 0;
-			background-color: rgba(183, 183, 183, 0.9);
-			border: 1px solid black;
-			min-width: 300px;
-			min-height: 100px;
-			margin: 0;
-			padding: 10px;
-		}
-	</style>
-</head>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<style>
+	#debug-box{
+		position: fixed;
+		background-color: rgba(255, 255, 255, 0.69);
+		top: 0;
+		right: 0;
+		margin: 0;
+		min-width: 100px;
+		text-align: right;
+		padding: 10px;
+	}
+</style>
+<script
+	src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script>
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
 
 <body style="margin: 0px; overflow: hidden;">
-	<p id="debug-panel">oie</p>
+
+	<script src="script.js"></script>
 
 	<a-scene embedded vr-mode-ui="enabled: false;"
 		arjs="debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
@@ -36,22 +32,23 @@
 		</a-marker>
 
 		<!-- 
-			this entity will move (lerp) towards the marker when visible;
-			turns green when marker visible, red when marker not visible
-		-->
+        this entity will move (lerp) towards the marker when visible;
+        turns green when marker visible, red when marker not visible
+    -->
 		<a-entity id="follower" active="0">
-			<a-box id="box" position="0 0 0" material="color: red; transparent: true; opacity: 0.80;"
-				scale="0.5 0.5 0.5" rotation="-20 0 0">
-			</a-box>
 			<a-plane id="followerPlane" position="0 0 0" rotation="-90 0 0" color="green"
 				material="src:#grid; transparent: true; opacity: 0.90; side:double; visible:false;">
 			</a-plane>
+			<a-box id="raquete" position="0 0 0" material="color: black; transparent: true; opacity: 0.80;"
+				scale="0.5 0.5 0.5" rotation="-20 0 0">
+			</a-box>
 		</a-entity>
 
 
 		<a-entity camera></a-entity>
 
 	</a-scene>
+	<p id="debug-box">olá</p>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 let markerVisible = false;
-const limiteMovimentoRaquete = 0.5;
+const limiteMovimentoRaquete = 0.3;
 
 function debugPrint(msg){
     document.getElementById("debug-box").innerText = msg;
@@ -31,10 +31,7 @@ AFRAME.registerComponent('registerevents', {
         this.q = new THREE.Quaternion();
         this.s = new THREE.Vector3();   
         
-        this.posRaquete = new THREE.Vector3();
-        this.posRaquete.x = 0.3;
-        this.posRaquete.y = 0.3;
-
+        this.posRaquete = {x:0.3,y:0.0,z:0.4};
     },
     
     tick: function (time, deltaTime) 
